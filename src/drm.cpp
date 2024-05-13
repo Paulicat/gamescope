@@ -107,6 +107,13 @@ static uint32_t legion_go_display_rates[] =
 	144,
 };
 
+static uint32_t oxp2_display_rates[] =
+{
+	40, 41, 42, 43, 44, 45, 46, 47, 48, 49,
+	50, 51, 52, 53, 54, 55, 56, 57, 58, 59,
+	60,
+};
+
 static uint32_t get_conn_display_info_flags(struct drm_t *drm, struct connector *connector)
 {
 	if (!connector)
@@ -921,6 +928,8 @@ static void parse_edid( drm_t *drm, struct connector *conn)
 			conn->valid_display_rates = std::span(steam_deck_display_rates);
 		} else if ( strcmp(conn->make_pnp, "LEN") == 0 && strcmp(conn->model, "Go Display") == 0 ) {
 			conn->valid_display_rates = std::span(legion_go_display_rates);
+		} else if ( strcmp(conn->make_pnp, "BOE") == 0 && strcmp(conn->model, "FLQ8423-24L0 ") == 0 ) {
+			conn->valid_display_rates = std::span(oxp2_display_rates);
 		}
 	}
 
